@@ -2,9 +2,9 @@ export const typeDefs = `
   type Village {
     _id: ID!
     name: String!
-    kage: Person
-    population: Int
-    battleforce: Battleforce
+    kage: Person!
+    population: Int!
+    battleforces: [Battleforce]!
   }
 
   enum Level {
@@ -17,14 +17,17 @@ export const typeDefs = `
  type Person {
      _id: ID!
      name: String!
+     village: Village!
     level: Level
     status: Status
+    battleforce: BattleForce
  }
 
  type Battleforce {
      _id: ID!
-    nrOfPeople: Int
-    listOfPeople: [Person]
+     villageId: ID!
+    nrOfPeople: Int!
+    listOfPeople: [Person]!
  }
 
  input PersonInput {
@@ -33,9 +36,9 @@ export const typeDefs = `
 
   type Query {
     getAllVillages: [Village]!
-    getVillageById: Village!
-    getPersonById: Person!
-    getPeopleByLevel: [Person]!
+    getVillageById(id: ID!): Village!
+    getPersonById(id: ID!): Person!
+    getPeopleByLevel(): [Person]!
   }
 
   type Mutation {

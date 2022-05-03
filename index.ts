@@ -24,14 +24,13 @@ const loggingMiddleware = (req: any, res: any, next: () => void) => {
 // 	})
 // );
 
-//const connect = `mongodb+srv://admin:adminpass@cluster0.sp9iv.mongodb.net/narutoDB?retryWrites=true&w=majority`;
 console.log(dbConfig.connectionString);
 mongoose.Promise = global.Promise;
 mongoose
 	.connect(dbConfig.connectionString)
 	.then(() => {
 		let app = express();
-		//	app.use(loggingMiddleware);
+		app.use(loggingMiddleware);
 		app.use(cors());
 
 		app.use(
